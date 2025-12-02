@@ -1,0 +1,70 @@
+name: 生成贪吃蛇贡献图
+on:
+  # 每周日零点自动更新（符合GitHub贡献度的周更新频率）
+  schedule:
+    - cron: "0 0 * * 0"
+  # 允许手动触发（第一次需要手动运行）
+  workflow_dispatch:
+jobs:
+  generate_snake:
+    runs-on: ubuntu-latest
+    steps:
+      # 调用社区提供的贪吃蛇生成工具
+      - uses: Platane/snk/svg-only@v3
+        with:
+          # 自动获取当前仓库所有者的GitHub用户名（无需硬编码）
+          github_user_name: ${{ github.repository_owner }}
+           # 指定输出的SVG文件（浅色+深色主题）
+           outputs: |
+             dist/github-contribution-grid-snake.svg
+             dist/github-contribution-grid-snake-dark.svg?palette=github-dark
+         # 保存生成的SVG文件（方便后续下载）
+         - uses: actions/upload-artifact@v4
+           with:
+             name: 贪吃蛇动画文件
+             path: |
+               dist/github-contribution-grid-snake.svg
+               dist/github-contribution-grid-snake-dark.svg?palette=github-dark
+   ```  
+3. **提交并触发**：  
+   点击「Commit changes」保存，回到「Actions」标签，找到「生成贪吃蛇贡献图」 workflow，点击「Run workflow」手动触发一次（第一次需要手动，之后每周自动更新）。  
+4. **替换贡献图**：  
+   等待Workflow完成后，在「Actions」→「生成贪吃蛇贡献图」→「Artifacts」中下载生成的两个SVG文件（`github-contribution-grid-snake.svg`为浅色主题，`github-contribution-grid-snake-dark.svg?palette=github-dark`为深色主题）。  
+   将这两个文件上传到你的个人主页仓库，然后在`README.md`中用以下代码替换原来的贡献度热图：  
+   ```markdown
+   ## 🐍 我的贡献记录（贪吃蛇版）
+   !（浅色主题）
+   !（深色主题，适配GitHub Dark模式）
+   ```  
+
+
+### **二、方案2：用github-contribution-snake Action（简化版）**  
+**效果**：与方案1类似，但配置更简单，适合不想写复杂Workflow的用户。  
+**步骤**：  
+1. 打开个人主页仓库的「Actions」→「New workflow」→「Set up a workflow yourself」。  
+2. 粘贴以下代码（无需修改，直接用）：  
+   ```yaml
+   name: 贪吃蛇贡献图（简化版）
+   on:
+     push:
+       branches: [main]
+     schedule:
+       - cron: "0 0 * * 0"
+   jobs:
+     build:
+       runs-on: ubuntu-latest
+       steps:
+         # 检查仓库代码
+         - uses: actions/checkout@v4
+         # 调用简化版的贪吃蛇生成工具
+         - uses: github-contribution-snake/github-contribution-snake@v1
+           with:
+             # 使用GitHub默认的令牌（无需额外配置）
+             github_token: ${{ secrets.GITHUB_TOKEN }}
+          # 指定输出路径（仅生成一个SVG，自动适配主题）
+          output_path: dist/snake.svg
+      # 保存文件
+      - uses: actions/upload-artifact@v4
+        with:
+          name: 贪吃蛇文件
+          path: dist/snake.svg
