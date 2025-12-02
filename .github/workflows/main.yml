@@ -3,7 +3,7 @@ on:
   # 每周日零点自动更新（符合GitHub贡献度的周更新频率）
   schedule:
     - cron: "0 0 * * 0"
-  # 允许手动触发（第一次需要手动运行）
+   # 允许手动触发（第一次需要手动运行）
   workflow_dispatch:
 jobs:
   generate_snake:
