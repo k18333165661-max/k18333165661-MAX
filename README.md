@@ -15,3 +15,6 @@
   }
 </style>
 
+## 📊 GitHub统计  
+![GitHub Stats](https://github-readme-stats.vercel.app/api?username=k18333165661-MAX&show_icons=true&theme=radical&count_private=true)  
+![Most Used Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=k18333165661-MAX&theme=radical&layout=compact)
