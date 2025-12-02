@@ -1,5 +1,3 @@
-<div style="background: linear-gradient(45deg, #667eea, #764ba2); animation: gradient 15s ease infinite; padding: 20px; border-radius: 10px; margin-bottom: 20px;">
-  <div style="background-color: white; padding: 20px; border-radius: 10px;">
 
  # 👋 Hi, I'm K.！  
 - 📍 坐标：天津  
@@ -24,12 +22,3 @@
 ![Ashutosh's github activity graph](https://github-readme-activity-graph.vercel.app/graph?username=k18333165661-MAX&theme=react-dark&radius=12&color=FDB927&line=006BB6&point=FDB927)
 
 
-  </div>
-</div>
-<style>
-  @keyframes gradient {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-  }
-</style>
